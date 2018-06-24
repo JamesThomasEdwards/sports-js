@@ -10,8 +10,13 @@ export default class StarWarsProfileContainer extends Component {
     }
     getUrls = () => {
         return new Promise((resolve, reject) => {
+            let numOfPages = new Promise((resolve, reject) => {
+                fetch(`https://swapi.co/api/people/`)
+                    .then(res => res.json())
+                    .then(res => resolve(res.count))
+            })
             const urls = [];
-            for (let i = 1; i < 10; i++) {
+            for (let i = 1; i < 11; i++) {
                 let promise = new Promise((resolve, reject) => {
                     fetch(`https://swapi.co/api/people/?page=${i}`)
                         .then(res => res.json())
@@ -46,7 +51,7 @@ export default class StarWarsProfileContainer extends Component {
                     fetch(`https://swapi.co/api/people/?page=${i}`)
                         .then(res => res.json())
                         .then(res => resolve(res))
-                        .catch(error => error)
+                        .catch(error => reject(error))
                 });
                 urls.push(promise)
             }
