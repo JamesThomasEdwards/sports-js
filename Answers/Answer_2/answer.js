@@ -15,7 +15,7 @@ const getUserNamesByIds = () => {
                     .then(userProfile => resolve(userProfile))
                     .catch(error => reject(error));
             });
-            // push each promise on to this array- lenght of 3
+            // push each promise on to this array- length of 3
             promiseUsersArr.push(promiseToGetUsers);
         };
         // once array of users from fetch is complete

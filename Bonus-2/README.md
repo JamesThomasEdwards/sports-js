@@ -23,7 +23,7 @@ npm run dev-server
 
 Go to http://localhost:8080/
 
-### Testing - Jest
+### Testing - Jest - snapShots
 
 ```
 cd Bonus-2
