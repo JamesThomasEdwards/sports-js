@@ -4,6 +4,7 @@ class PubSub {
     }
 
     publish(namespace, payload) {
+        // publish 
         let logs = this.topics[namespace];
         if (!logs) return;
         logs.forEach(log => {

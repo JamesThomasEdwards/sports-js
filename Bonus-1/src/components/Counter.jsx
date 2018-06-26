@@ -8,8 +8,8 @@ const propTypes = {
 };
 const Counter = (props) => {
     return (
-        <div className='counter-container'>
-            <p className='counter-container__p'>Counter: {props.score}</p>
+        <div className="counter-container">
+            <p className="counter-container__p">Counter: {props.score}</p>
         </div>
     );
 };

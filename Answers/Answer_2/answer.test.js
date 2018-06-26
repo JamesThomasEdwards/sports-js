@@ -4,18 +4,6 @@ const expect = chai.expect;
 const chaiFetchMock = require('chai-fetch-mock');
 const fetchMock = require('fetch-mock');
 
-
-
-// describe('Question one test', () => {
-//     it('should return an array of six http', () => {
-
-//         let actualResult = getNames()
-
-//         return actualResult.to.eventually.equal(["Leanne Graham", "Ervin Howell", "Clementine Bauch"])
-
-//     })
-
-// })
 chai.use(chaiFetchMock);
 
 describe('Question two test', () => {

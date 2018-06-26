@@ -1,5 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render BoardContainer component correctly 1`] = `<button />`;
-
-exports[`should render Button component correctly 1`] = `<button />`;
+exports[`should render Button component correctly 1`] = `
+<div
+  className="button-container"
+>
+  <button />
+</div>
+`;

@@ -1,3 +1,5 @@
+const fetch = require('node-fetch')
+
 const usersIdList = [1, 2, 3];
 
 const getUserNamesByIds = () => {
@@ -18,7 +20,6 @@ const getUserNamesByIds = () => {
         };
         // once array of users from fetch is complete
         // filter through the array to get the names
-        // this is how it's done concurrently 
         Promise.all(promiseUsersArr).then((usersArr) => {
             let names = usersArr.reduce((accum, user) => {
                 accum.push(user.name);
@@ -31,11 +32,14 @@ const getUserNamesByIds = () => {
 };
 
 async function getNames() {
-    let output = await getUserNamesByIds(usersIdList);
+    let output = await getUserNamesByIds(usersIdList).catch(err => err)
+    // console.log used for testing
+    console.log(output);
     return output;
+
 };
 
-console.log('get names', getNames());
+getNames();
 
 module.exports = getNames;
 

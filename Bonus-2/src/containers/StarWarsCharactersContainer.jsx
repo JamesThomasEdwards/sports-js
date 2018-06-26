@@ -2,7 +2,7 @@
 import React from 'react';
 import { Component } from 'react';
 // Files;
-import Profile from '../components/Profile.jsx';
+import StarWarsCharacters from '../components/StarWarsCharacters.jsx';
 
 export default class StarWarsProfileContainer extends Component {
     state = {
@@ -24,7 +24,7 @@ export default class StarWarsProfileContainer extends Component {
         for (let i = 1; i <= numberOfPages; i++) {
             profiles.push(fetch(`https://swapi.co/api/people/?page=${i}`)
                 .then(res => res.json())
-                .catch(err => new Error(err)))
+                .catch(err => new Error(err)));
         };
         return Promise.all(profiles).then(values => {
             return values.reduce((accum, page) => {
@@ -44,29 +44,29 @@ export default class StarWarsProfileContainer extends Component {
     settingState = (filteredProfileData) => {
         this.setState(() => ({ profiles: filteredProfileData }));
     };
-
+    // takes in getPageCount, getCharacterProfiles, & settingState
     allCharacterProfileData = async () => {
         let numOfPages = await this.getPageCount();
         let getAllProfiles = await this.getCharacterProfiles(numOfPages);
-        let settingCorrectData = await this.settingState(getAllProfiles);
-        return settingCorrectData;
+        let settingProfileDataToState = await this.settingState(getAllProfiles);
+        return settingProfileDataToState;
     };
     componentDidMount() {
         this.allCharacterProfileData();
     };
     render() {
         const profiles = this.state.profiles.map((profile, ind) => {
-            return <Profile
+            return <StarWarsCharacters
                 id={ind}
                 key={'Profile' + ind}
                 profileData={profile} />
         });
         return (
             <div>
-                <h1 className='profile-table-container__h1'>
+                <h1 className="character-table-container__h1">
                     Star Wars Character Profiles
                 </h1>
-                <div className='profile-table-container'>
+                <div className="character-table-container">
                     {profiles}
                 </div>
             </div>

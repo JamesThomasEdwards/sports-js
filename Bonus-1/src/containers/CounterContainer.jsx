@@ -38,11 +38,11 @@ export default class BoardContainer extends Component {
                 key={'button' + ind}
                 handeler={ele.method}
                 buttonTitles={ele.title} />
-        })
+        });
         return (
             <div>
                 <Counter score={this.state.score} />
-                <div className='button-container'>
+                <div className="button-container">
                     {buttons}
                 </div>
             </div>

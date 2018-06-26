@@ -1,8 +1,6 @@
 const getAllImages = require('./answer')
 const chai = require('chai');
-const should = require('chai').should();
 const expect = chai.expect;
-const assert = chai.assert;
 
 
 describe('Question one test', () => {

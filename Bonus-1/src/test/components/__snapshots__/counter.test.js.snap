@@ -1,7 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render Counter component correctly 1`] = `
-<p>
-  Counter: 
-</p>
+<div
+  className="counter-container"
+>
+  <p
+    className="counter-container__p"
+  >
+    Counter: 
+  </p>
+</div>
 `;

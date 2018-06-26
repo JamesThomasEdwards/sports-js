@@ -9,7 +9,7 @@ const propTypes = {
 };
 const Button = (props) => {
     return (
-        <div className='button-container'>
+        <div className="button-container">
             <button
                 onClick={props.handeler}>
                 {props.buttonTitles}

@@ -1,13 +1,13 @@
 // React;
 import React from 'react';
 // Files;
-import BoardContainer from './containers/BoardContainer.jsx';
+import CounterContainer from './containers/CounterContainer.jsx';
 
 
-const App = (props) => {
+const App = () => {
     return (
-        <div className='board-container'>
-            <BoardContainer startValue={0} />
+        <div className="wrap-counter-container">
+            <CounterContainer startValue={0} />
         </div>
     );
 };

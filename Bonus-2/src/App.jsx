@@ -1,12 +1,12 @@
 // React;
 import React from 'react';
 // Files;
-import StarWarsProfileContainer from './containers/StarWarsProfileContainer.jsx';
+import StarWarsCharactersContainer from './containers/StarWarsCharactersContainer.jsx';
 
-const App = (props) => {
+const App = () => {
     return (
-        <div className='board-container'>
-            <StarWarsProfileContainer />
+        <div className="board-container">
+            <StarWarsCharactersContainer />
         </div>
     );
 };
