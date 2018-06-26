@@ -1,93 +1,75 @@
 // React;
 import React from 'react';
 import { Component } from 'react';
-// Files
-import Row from '../components/Row.jsx';
+// Files;
+import Profile from '../components/Profile.jsx';
 
 export default class StarWarsProfileContainer extends Component {
     state = {
         profiles: []
-    }
-    getUrls = () => {
-        return new Promise((resolve, reject) => {
-            let numOfPages = new Promise((resolve, reject) => {
-                fetch(`https://swapi.co/api/people/`)
-                    .then(res => res.json())
-                    .then(res => resolve(res.count))
-            })
-            const urls = [];
-            for (let i = 1; i < 11; i++) {
-                let promise = new Promise((resolve, reject) => {
-                    fetch(`https://swapi.co/api/people/?page=${i}`)
-                        .then(res => res.json())
-                        .then(res => resolve(res))
+    };
+
+    // gets number of pages;
+    getPageCount = () => {
+        return fetch(`https://swapi.co/api/people/?page=1`)
+            .then(res => res.json())
+            .then(pageOneObject => Math.ceil(pageOneObject.count / 10))
+            .catch(error => console.log(error));
+    };
+    // takes in number of pages;
+    // fetches each page and gets all profile data in an array;
+    // then filters through it and sent to setttingState;
+    getCharacterProfiles = (numberOfPages) => {
+        const profiles = [];
+        for (let i = 1; i <= numberOfPages; i++) {
+            profiles.push(fetch(`https://swapi.co/api/people/?page=${i}`)
+                .then(res => res.json())
+                .catch(err => new Error(err)))
+        };
+        return Promise.all(profiles).then(values => {
+            return values.reduce((accum, page) => {
+                page.results.forEach(profile => {
+                    accum.push({
+                        name: profile.name,
+                        birth_year: profile.birth_year,
+                        height: profile.height,
+                        mass: profile.mass
+                    });
                 });
-                urls.push(promise)
-            }
-            Promise.all(urls).then((values) => {
-                let profile = values.reduce((accum, value) => {
-                    value.results.forEach(ele => {
-                        accum.push({
-                            name: ele.name,
-                            birth_year: ele.birth_year,
-                            height: ele.height,
-                            mass: ele.mass
-                        })
-                    })
-                    return accum
-                }, [])
-                resolve(profile)
-            })
+                return accum
+            }, []);
+        });
+    };
+    // sets state with new filtered prfile data array;
+    settingState = (filteredProfileData) => {
+        this.setState(() => ({ profiles: filteredProfileData }));
+    };
 
-        })
-            .then(profile => this.setState(() => ({ profiles: profile })))
-    }
-
+    allCharacterProfileData = async () => {
+        let numOfPages = await this.getPageCount();
+        let getAllProfiles = await this.getCharacterProfiles(numOfPages);
+        let settingCorrectData = await this.settingState(getAllProfiles);
+        return settingCorrectData;
+    };
     componentDidMount() {
-        return new Promise((resolve, reject) => {
-            const urls = [];
-            for (let i = 1; i < 10; i++) {
-                let promise = new Promise((resolve, reject) => {
-                    fetch(`https://swapi.co/api/people/?page=${i}`)
-                        .then(res => res.json())
-                        .then(res => resolve(res))
-                        .catch(error => reject(error))
-                });
-                urls.push(promise)
-            }
-            Promise.all(urls).then((values) => {
-                let profile = values.reduce((accum, value) => {
-                    value.results.forEach(ele => {
-                        accum.push({
-                            name: ele.name,
-                            birth_year: ele.birth_year,
-                            height: ele.height,
-                            mass: ele.mass
-                        })
-                    })
-                    return accum
-                }, [])
-                resolve(profile)
-            })
-
-        })
-            .then(profile => this.setState(() => ({ profiles: profile })))
-            .catch(error => error)
-    }
+        this.allCharacterProfileData();
+    };
     render() {
-        const rows = this.state.profiles.map((ele, ind) => {
-            if (ind % 3 === 0) return <Row
+        const profiles = this.state.profiles.map((profile, ind) => {
+            return <Profile
                 id={ind}
-                key={'row' + ind}
-                allProfiles={this.state.profiles} />
-        })
-
+                key={'Profile' + ind}
+                profileData={profile} />
+        });
         return (
-            <div className='board-container'>
-                <h1>Star Wars Character Profiles</h1>
-                {rows}
+            <div>
+                <h1 className='profile-table-container__h1'>
+                    Star Wars Character Profiles
+                </h1>
+                <div className='profile-table-container'>
+                    {profiles}
+                </div>
             </div>
-        )
-    }
-
-}
+        );
+    };
+};

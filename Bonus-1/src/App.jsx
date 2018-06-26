@@ -1,17 +1,15 @@
 // React;
 import React from 'react';
-import { Component } from 'react';
 // Files;
 import BoardContainer from './containers/BoardContainer.jsx';
 
 
-export default class App extends Component {
-    render() {
-
-        return (
-            <div>
-                <BoardContainer />
-            </div>
-        );
-    };
+const App = (props) => {
+    return (
+        <div className='board-container'>
+            <BoardContainer startValue={0} />
+        </div>
+    );
 };
+
+export default App;

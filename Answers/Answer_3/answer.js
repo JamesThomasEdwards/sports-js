@@ -1,33 +1,32 @@
 class PubSub {
     constructor() {
-        this.topics = {}
+        this.topics = {};
     }
 
     publish(namespace, payload) {
-        let handelers = this.topics[namespace];
-        if (!handelers) return
-        handelers.forEach(handeler => {
-            handeler.call(this, payload)
-        })
-
-    }
+        let logs = this.topics[namespace];
+        if (!logs) return;
+        logs.forEach(log => {
+            log.call(this, payload);
+        });
+    };
 
     subscribe(namespace, callback) {
-        let handlers = this.topics[namespace];
-        if (!!handlers === false) {
-            handlers = this.topics[namespace] = [];
-        }
-        handlers.push(callback);
-    }
+        // subscribe to a publisher;
+        let logs = this.topics[namespace];
+        if (!!logs === false) {
+            logs = this.topics[namespace] = [];
+        };
+        logs.push(callback);
+    };
 
     unsubscribe(namespace, callback) {
-        let handlers = this.topics[namespace];
-        if (!!handlers === false) return;
-
-        var handlerIdx = handlers.indexOf(callback);
-        handlers.splice(handlerIdx, 1);
-    }
-
+        // unsubscribe to a publisher;
+        let logs = this.topics[namespace];
+        if (!!logs === false) return;
+        var logsInd = logs.indexOf(callback);
+        logs.splice(logsInd, 1);
+    };
 };
 
 module.exports = PubSub;

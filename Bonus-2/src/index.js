@@ -11,6 +11,5 @@ import './styles/styles.scss';
 const jsx = (
     <App />
 );
-// fist permater is starting poing
-// second peramter is where to append to HTML
+
 ReactDOM.render(jsx, document.getElementById('app'));

@@ -7,7 +7,7 @@ import Button from '../components/Button.jsx';
 
 export default class BoardContainer extends Component {
     state = {
-        score: 0
+        score: this.props.startValue
     };
     // increase score by 1
     increaseScore = () => {
@@ -24,24 +24,28 @@ export default class BoardContainer extends Component {
     // resets score to 0
     resetScore = () => {
         this.setState(() => ({ score: 0 }))
-    }
+    };
     render() {
-        const buttonHandelers = [this.increaseScore, this.decreaseScore, this.resetScore]
-        const buttonTitles = ['add', 'subtract', 'reset']
+        const buttonAssests =
+            [{ title: 'ADD (+)', method: this.increaseScore },
+            { title: 'SUBTRACT (-)', method: this.decreaseScore },
+            { title: 'RESET', method: this.resetScore }]
         // creates 3 button components, each with their 
         // title and click handelers
-        const buttons = buttonHandelers.map((ele, ind) => {
+        const buttons = buttonAssests.map((ele, ind) => {
             return <Button
                 id={ind}
                 key={'button' + ind}
-                handeler={ele}
-                buttonTitles={buttonTitles[ind]} />
+                handeler={ele.method}
+                buttonTitles={ele.title} />
         })
         return (
             <div>
                 <Counter score={this.state.score} />
-                {buttons}
+                <div className='button-container'>
+                    {buttons}
+                </div>
             </div>
-        )
-    }
-}
+        );
+    };
+};

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render StarWarsProfileContainer component correctly 1`] = `
+<div>
+  <h1
+    className="profile-table-container__h1"
+  >
+    Star Wars Character Profiles
+  </h1>
+  <div
+    className="profile-table-container"
+  />
+</div>
+`;

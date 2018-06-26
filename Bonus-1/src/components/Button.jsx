@@ -1,13 +1,23 @@
 // React;
 import React from 'react';
+// Prop types;
+import PropTypes from 'prop-types';
 
+const propTypes = {
+    handeler: PropTypes.func,
+    buttonTitles: PropTypes.string
+};
 const Button = (props) => {
     return (
-        <button
-            onClick={props.handeler}>
-            {props.buttonTitles}
-        </button>
-    )
-}
+        <div className='button-container'>
+            <button
+                onClick={props.handeler}>
+                {props.buttonTitles}
+            </button>
+        </div>
+    );
+};
 
-export default Button
+Button.propTypes = propTypes;
+
+export default Button;

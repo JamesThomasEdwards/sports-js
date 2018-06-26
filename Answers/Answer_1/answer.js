@@ -33,8 +33,7 @@ const posts = [
         images: []
     },
 ];
-// use reduce reduce each post to just images
-
+// reduce each posts to just images
 const getAllImages = () => {
     return posts.reduce((accum, ele) => {
         ele.images.forEach(ele => {
