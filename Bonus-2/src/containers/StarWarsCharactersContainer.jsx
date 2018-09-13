@@ -19,6 +19,7 @@ export default class StarWarsProfileContainer extends Component {
     // takes in number of pages;
     // fetches each page and gets all profile data in an array;
     // then filters through it and sent to setttingState;
+
     getCharacterProfiles = (numberOfPages) => {
         const profiles = [];
         for (let i = 1; i <= numberOfPages; i++) {

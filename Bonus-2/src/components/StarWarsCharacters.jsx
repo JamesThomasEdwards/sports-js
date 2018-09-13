@@ -1,4 +1,4 @@
-// React
+// React;
 import React from 'react';
 // Prop types;
 import PropTypes from 'prop-types';

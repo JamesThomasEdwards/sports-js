@@ -7,7 +7,7 @@ import Button from '../components/Button.jsx';
 
 export default class BoardContainer extends Component {
     state = {
-        score: this.props.startValue
+        score: 0
     };
     // increase score by 1
     increaseScore = () => {
